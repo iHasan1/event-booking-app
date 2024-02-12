@@ -1,0 +1,9 @@
+GET     /events                     ----->      Get a list of available events
+GET     /events/<id>                ----->      Get details of an event
+POST    /events                     ----->      Create a new bookable event             Auth Required
+PUT     /events/<id>                ----->      update an event                         Auth Required       Only By Creater
+DELETE  /events/<id>                ----->      delete an event                         Auth Required       Only By Creater
+POST    /signup                     ----->      create new user
+POST    /login                      ----->      authenticate user                       JSON WEB TOKEN (JWT)
+POST    /events/<id>/register       ----->      register user for event                 Auth Required
+DELETE  /events/<id>/register       ----->      cancel registration                     Auth Required
