@@ -2,7 +2,7 @@ package models
 
 import (
 	"time"
-	
+
 	"example.com/event-booking-app/db"
 )
 
@@ -15,9 +15,7 @@ type Event struct {
 	UserID      int
 }
 
-var events = []Event{}
-
-func (e Event) Save() error {
+func (e *Event) Save() error {
 	//Later: add it to a database
 	query := `
 	INSERT into events (name, description, location, dateTime, user_id) 
@@ -78,4 +76,23 @@ func GetEventByID(id int64) (*Event, error) {
 	}
 
 	return &event, nil
+}
+
+func (event Event) Update() error {
+	query := `
+	UPDATE events
+	SET	name = ?, description = ?, location = ?, dateTime = ?
+	WHERE id = ?
+	`
+
+	stmt, err := db.DB.Prepare(query)
+
+	if err != nil {
+		return err
+	}
+
+	defer stmt.Close()
+
+	_, err = stmt.Exec(event.Name, event.Description, event.Location, event.DateTime, event.ID)
+	return err
 }
