@@ -111,7 +111,7 @@ func deleteEvent(context *gin.Context) {
 	}
 
 	userId := context.GetInt64("userId")
-	event, err := models.GetEventByID(eventId)y
+	event, err := models.GetEventByID(eventId)
 
 	if err != nil {
 		context.JSON(http.StatusInternalServerError, gin.H{"message": "Could not fetch the event."})
